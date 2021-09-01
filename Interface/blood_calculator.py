@@ -1,3 +1,6 @@
+# print("This is the blood_calculator.py module")
+# print(f"It's name is {__name__}")
+
 def interface():
     print("Blood Calculator")
     keep_running = True
@@ -61,4 +64,5 @@ def ldl_output(LDL_value, LDL_answer):
     print(f"The LDL value of {LDL_value} is considered {LDL_answer}")
     return
 
-interface()
+if __name__ == "__main__":
+    interface()
