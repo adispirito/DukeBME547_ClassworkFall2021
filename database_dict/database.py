@@ -1,17 +1,69 @@
-def create_database_entry(patient_name, id_no, age):
-    new_patient = [patient_name, id_no, age, []]
+class Patient:
+
+    def __init__(self, name, id_no, age, tests):
+        self.name = name
+        self.id_no = id_no
+        self.age = age
+        self.tests = tests
+
+    @property
+    def name(self):
+        return self._name
+    @name.setter
+    def name(self, value):
+        self._name = value
+
+    @property
+    def id_no(self):
+        return self._id_no
+    @id_no.setter
+    def id_no(self, value):
+        self._id_no = value
+
+    @property
+    def age(self):
+        return self._age
+    @age.setter
+    def age(self, value):
+        self._age = value
+
+    @property
+    def tests(self):
+        return self._tests
+    @tests.setter
+    def tests(self, value):
+        self._tests = value
+
+    def __repr__(self):
+        return f"{self._id_no}: {self._name}"
+
+# def classwork():
+#     new_patient = Patient("Ann Ables",
+#                           120,
+#                           36,
+#                           [])
+#     new_patient.name = "Bob"
+
+
+def create_database_entry(patient_name, id_no, age, tests = []):
+    # new_patient = {'patient_name': patient_name,
+    #                'id_no': id_no,
+    #                'age': age,
+    #                'tests': []}
+    new_patient = Patient(patient_name, id_no, age, tests)
     return new_patient
 
 def print_database(db):
     for elem in db:
-        print(db)
-        print(f"Name = {db[0]}")
+        # print(db)
+        # print(f"Name = {db['patient_name']}")
+        print(f"Name = {db.patient_name}")
 
 def print_age_over(db, age_thres = 32):
     for entry in db:
-        age = entry[2]
+        age = entry['age']
         if age > age_thres:
-            name = entry[0]
+            name = entry['patient_name']
             print(name)
 
 def print_database_enum(db):
@@ -25,21 +77,28 @@ def print_database_zip(db):
         print(f"{i} - {elem} - {location}")
 
 def get_patient(db, id_no):
-    for entry in db:
-        if entry[1] == id_no:
-            return entry
+    patient = db[id_no]
+    # for entry in db:
+    #     # print(entry)
+    #     if entry['id_no'] == id_no:
+    #         return entry
+    return patient
 
 def main():
-    db = []
+    db = {}
     x = create_database_entry("Ann Ables", 1, 30)
-    db.append(x)
+    # db.append(x)
+    db[x.id_no] = x
     x = create_database_entry("Bob Boyles", 2, 31)
-    db.append(x)
+    # db.append(x)
+    db[x.id_no] = x
     x = create_database_entry("Chris Chou", 3, 33)
-    db.append(x)
+    # db.append(x)
+    db[x.id_no] = x
     x = create_database_entry("David Dinkins", 4, 34)
-    db.append(x)
-    # print(db)
+    # db.append(x)
+    db[x.id_no] = x
+    print(db)
 
     # y = db[1]
     # print(y)
@@ -59,11 +118,16 @@ def main():
 
     # print_database_zip(db)
 
-    patient_id_tested = 24
+    patient_id_tested = 4
     test_done = ("HDL", 65)
     patient = get_patient(db, patient_id_tested)
-    patient[3].append(test)
-    print_database_zip(db)
+    # print(patient)
+    # patient['tests'].append(test_done)
+    # print(db)
+    patient.tests.append(test_done)
+    print(db)
+
+    # print_database_zip(db)
 
 if __name__ == "__main__":
     main()
