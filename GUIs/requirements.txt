@@ -1,0 +1,7 @@
+pytest
+pytest-pycodestyle
+flask
+requests
+pymodm
+dnspython
+Pillow
